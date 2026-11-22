@@ -1,0 +1,22 @@
+Job Title: Lead Data Scientist
+Department: Data & Analytics
+Location: Remote / Hybrid
+
+Role Summary:
+We are looking for a skilled Data Scientist to translate complex business problems into machine learning and predictive analytics solutions. You will work with large structured and unstructured datasets to train, evaluate, and deploy predictive models into production.
+
+Key Responsibilities:
+- Develop, validate, and operationalize predictive machine learning, deep learning, and natural language processing (NLP) models.
+- Perform exploratory data analysis (EDA), feature engineering, and data preprocessing on structured and unstructured datasets.
+- Implement statistical hypothesis testing, A/B testing frameworks, and regression analysis to guide business decision-making.
+- Build reproducible training pipelines using Python, Scikit-learn, PyTorch, and TensorFlow.
+- Leverage big data processing tools including Apache Spark and Hadoop for large-scale data manipulation.
+- Design interactive data visualizations and business intelligence reports with Tableau, Power BI, Matplotlib, and Seaborn.
+
+Required Qualifications & Skills:
+- 3+ years of industry experience applying machine learning algorithms, classification, clustering, and neural networks.
+- Advanced proficiency in Python, NumPy, Pandas, Scipy, and Jupyter Notebook environments.
+- Solid theoretical foundation in probability theory, linear algebra, inferential statistics, and hypothesis testing.
+- Practical experience with deep learning frameworks (PyTorch or TensorFlow) and transformer architectures.
+- Experience building production-grade feature pipelines and evaluating models using rigorous metrics (AUC, F1, RMSE).
+- Degree in Computer Science, Data Science, Statistics, Mathematics, or related quantitative field.

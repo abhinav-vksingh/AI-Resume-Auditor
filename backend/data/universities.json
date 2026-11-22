@@ -1,0 +1,27 @@
+{
+  "_note": "Used for counterfactual university-prestige bias auditing only. 'Well-known' vs 'lesser-known' reflects common perception of institutional prestige, not educational quality. All institutions are real and accredited.",
+  "well_known": [
+    "Massachusetts Institute of Technology",
+    "Stanford University",
+    "Harvard University",
+    "Indian Institute of Technology Delhi",
+    "Indian Institute of Technology Bombay",
+    "Carnegie Mellon University",
+    "University of California Berkeley",
+    "University of Oxford",
+    "Georgia Institute of Technology",
+    "University of Michigan"
+  ],
+  "lesser_known": [
+    "University of North Dakota",
+    "Western Kentucky University",
+    "Fayetteville State University",
+    "Southeastern Louisiana University",
+    "Indiana University of Pennsylvania",
+    "Youngstown State University",
+    "Lamar University",
+    "Valdosta State University",
+    "Fort Hays State University",
+    "Tarleton State University"
+  ]
+}

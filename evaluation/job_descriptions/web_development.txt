@@ -1,0 +1,22 @@
+Job Title: Full Stack Web Developer
+Department: Product Engineering
+Location: Remote / Hybrid
+
+Role Summary:
+We are hiring a Full Stack Web Developer to design and develop customer-facing web applications and performant user interfaces. You will work across both client-side and server-side codebases to build responsive, accessible web products.
+
+Key Responsibilities:
+- Build responsive, modern single-page applications (SPAs) using React, Next.js, TypeScript, and modern JavaScript.
+- Style responsive user interfaces using HTML5, CSS3, Tailwind CSS, Bootstrap, and SASS.
+- Architect server-side web APIs and services using Node.js, Express, FastAPI, and Django.
+- Configure web servers and reverse proxies using Nginx and deploy full-stack applications with Docker and Vercel.
+- Integrate authentication and security mechanisms including OAuth, JWT, and CORS across client and server.
+- Optimize web application performance, bundle size, and adhere to web accessibility standards.
+
+Required Qualifications & Skills:
+- 3+ years of professional full-stack web development experience.
+- Deep expertise in HTML, CSS, JavaScript, React, and component state management (Redux or Context API).
+- Experience building RESTful APIs using Node.js, Express, FastAPI, or Django.
+- Solid understanding of web fundamentals: DOM manipulation, asynchronous programming, JSON, HTTP protocols, and browser APIs.
+- Familiarity with build tools such as Webpack, Vite, and version control with Git.
+- Demonstrated attention to responsive design, accessibility (WCAG), and clean UI/UX implementation.

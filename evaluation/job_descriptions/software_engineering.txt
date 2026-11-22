@@ -1,0 +1,22 @@
+Job Title: Senior Software Engineer
+Department: Engineering
+Location: Remote / Hybrid
+
+Role Summary:
+We are seeking an experienced Senior Software Engineer to design, build, and maintain robust, scalable backend services and microservices architecture. You will collaborate with cross-functional product teams to deliver high-quality, fault-tolerant software systems.
+
+Key Responsibilities:
+- Design, implement, and maintain distributed backend systems and REST APIs using Python, Go, and Java.
+- Build and optimize relational and non-relational database models using PostgreSQL, MySQL, and Redis.
+- Package application services using Docker and orchestrate containerized workloads with Kubernetes on AWS cloud infrastructure.
+- Establish automated CI/CD deployment pipelines, unit testing, and test-driven development (TDD) best practices.
+- Collaborate with engineering leads following Agile and Scrum methodologies; participate in code reviews and architectural design sessions.
+
+Required Qualifications & Skills:
+- 4+ years of professional backend software development experience.
+- Strong proficiency in Python, Java, or C++, with deep knowledge of algorithms, data structures, and object-oriented programming (OOP).
+- Hands-on experience with Docker, Kubernetes, Linux environments, Git, and CI/CD pipelines.
+- Production experience designing RESTful APIs, microservices, and event-driven architectures.
+- Experience with relational databases such as PostgreSQL or MySQL, alongside caching layers like Redis.
+- Familiarity with cloud platforms (AWS, Google Cloud Platform, or Microsoft Azure).
+- Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience.

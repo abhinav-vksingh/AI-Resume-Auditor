@@ -1,0 +1,51 @@
+{
+  "software_engineering": [
+    "python", "java", "javascript", "typescript", "c++", "c#", "go", "rust",
+    "kotlin", "swift", "scala", "ruby", "php", "bash", "r programming",
+    "algorithms", "data structures", "object-oriented programming", "design patterns",
+    "unit testing", "test-driven development", "agile methodology", "scrum",
+    "git", "docker", "kubernetes", "ci/cd", "linux", "sql", "rest api",
+    "graphql", "microservices", "aws", "google cloud platform", "microsoft azure",
+    "postgresql", "mysql", "mongodb", "redis", "elasticsearch",
+    "celery", "kafka", "rabbitmq", "terraform", "prometheus", "grafana"
+  ],
+  "data_science": [
+    "machine learning", "deep learning", "natural language processing",
+    "computer vision", "tensorflow", "pytorch", "scikit-learn", "pandas",
+    "numpy", "scipy", "matplotlib", "seaborn", "data analysis",
+    "feature engineering", "model evaluation", "hyperparameter tuning",
+    "neural networks", "transformers", "reinforcement learning",
+    "data visualization", "power bi", "tableau", "jupyter notebook",
+    "regression analysis", "classification", "clustering", "statistics",
+    "probability theory", "a/b testing", "hypothesis testing",
+    "time series analysis", "big data", "apache spark", "hadoop",
+    "data preprocessing", "polars"
+  ],
+  "web_development": [
+    "html", "css", "react", "angular", "vuejs", "nodejs", "express",
+    "django", "flask", "fastapi", "bootstrap", "tailwind css", "next.js",
+    "webpack", "responsive design", "web accessibility", "oauth", "json",
+    "xml", "nginx", "apache", "restful apis", "single page application",
+    "progressive web app", "sass", "redux", "firebase", "vercel",
+    "web scraping"
+  ],
+  "human_resources": [
+    "recruitment", "talent acquisition", "onboarding", "performance management",
+    "employee relations", "payroll", "benefits administration",
+    "training and development", "workforce planning", "organizational development",
+    "compliance", "labor law", "applicant tracking system",
+    "compensation management", "succession planning", "employee engagement",
+    "hr analytics", "conflict resolution", "diversity and inclusion",
+    "change management", "learning management system", "job evaluation",
+    "employer branding", "strategic hr", "workforce analytics"
+  ],
+  "sales": [
+    "sales management", "customer relationship management", "lead generation",
+    "salesforce", "account management", "business development", "negotiation",
+    "cold calling", "market research", "sales forecasting", "pipeline management",
+    "revenue growth", "upselling", "cross-selling", "territory management",
+    "crm software", "product demonstration", "customer retention",
+    "b2b sales", "b2c sales", "sales analytics", "prospecting",
+    "closing deals", "quota attainment", "strategic selling"
+  ]
+}

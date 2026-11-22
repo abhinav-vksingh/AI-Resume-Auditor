@@ -1,0 +1,5 @@
+attribute,mode,group_a_label,group_b_label,n_resumes,n_pairs_per_resume,total_observations,mean_delta,std_delta,ci_95_lower,ci_95_upper,p_value,significant
+name,raw,white_american,black_american,30,5,150,0.1509,0.4845,-0.0301,0.3318,0.098813,False
+name,redacted,white_american,black_american,30,5,150,0.0,0.0,0.0,0.0,nan,False
+university,raw,well_known,lesser_known,30,5,150,0.1971,0.8588,-0.1236,0.5178,0.218847,False
+university,redacted,well_known,lesser_known,30,5,150,0.2109,0.695,-0.0487,0.4704,0.107336,False
