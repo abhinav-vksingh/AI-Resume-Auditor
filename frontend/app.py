@@ -10,13 +10,49 @@ A clean, friendly interface designed for students and recruiters to:
 from __future__ import annotations
 
 import os
+import socket
+import sys
+import threading
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
+from urllib.parse import urlparse
+
+# ---------------------------------------------------------------------------
+# Path & Secrets Setup for Streamlit Community Cloud
+# ---------------------------------------------------------------------------
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 import httpx
 import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
+
+st.set_page_config(
+    page_title="AI Resume Auditor",
+    page_icon="📄",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+# Copy any keys from st.secrets into os.environ (LLM_API_KEY, LLM_MODEL, etc.)
+try:
+    if hasattr(st, "secrets"):
+        for k in st.secrets:
+            val = st.secrets[k]
+            if isinstance(val, (str, int, float, bool)):
+                os.environ.setdefault(k, str(val))
+                os.environ.setdefault(k.upper(), str(val))
+            elif isinstance(val, dict):
+                for sub_k, sub_v in val.items():
+                    if isinstance(sub_v, (str, int, float, bool)):
+                        os.environ.setdefault(sub_k, str(sub_v))
+                        os.environ.setdefault(sub_k.upper(), str(sub_v))
+except Exception:
+    pass
 
 # ---------------------------------------------------------------------------
 # Configuration & Environment
@@ -26,13 +62,6 @@ load_dotenv()
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
 EVAL_DIR = Path(__file__).resolve().parent.parent / "evaluation"
-
-st.set_page_config(
-    page_title="AI Resume Auditor",
-    page_icon="📄",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
 
 # ---------------------------------------------------------------------------
 # Custom Styling for Chips, Cards & Visual Polish
@@ -139,11 +168,82 @@ st.markdown(
 
 
 # ---------------------------------------------------------------------------
+# Backend Process Lifecycle Management (Streamlit Cloud Support)
+# ---------------------------------------------------------------------------
+
+def _is_port_in_use(port: int, host: str = "127.0.0.1") -> bool:
+    """Check whether a TCP port is currently open / in use."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(0.5)
+        return s.connect_ex((host, port)) == 0
+
+
+@st.cache_resource
+def ensure_backend_running() -> bool:
+    """Launch the FastAPI backend in a background daemon thread once and wait for health check."""
+    # Check if backend already answers /health
+    try:
+        r = httpx.get(f"{BACKEND_URL}/health", timeout=1.0)
+        if r.status_code == 200:
+            return True
+    except Exception:
+        pass
+
+    target_host = "127.0.0.1"
+    target_port = 8000
+    try:
+        parsed = urlparse(BACKEND_URL)
+        if parsed.hostname:
+            target_host = parsed.hostname
+        if parsed.port:
+            target_port = parsed.port
+    except Exception:
+        pass
+
+    # If port 8000 is already in use locally, do not crash: assume backend is already running and continue
+    if _is_port_in_use(target_port, target_host):
+        return True
+
+    # Launch uvicorn (backend.app.main:app, host 127.0.0.1, port 8000) in a daemon thread ONCE
+    def _run_server():
+        try:
+            import uvicorn
+            config = uvicorn.Config(
+                "backend.app.main:app",
+                host=target_host,
+                port=target_port,
+                log_level="warning",
+            )
+            server = uvicorn.Server(config)
+            server.run()
+        except Exception:
+            pass
+
+    t = threading.Thread(target=_run_server, daemon=True, name="uvicorn-worker")
+    t.start()
+
+    # Wait until GET /health answers (up to 90 seconds) and show spinner
+    with st.spinner("Starting the analysis engine..."):
+        start_time = time.time()
+        while time.time() - start_time < 90:
+            try:
+                resp = httpx.get(f"{BACKEND_URL}/health", timeout=1.5)
+                if resp.status_code == 200:
+                    return True
+            except Exception:
+                pass
+            time.sleep(0.5)
+
+    return False
+
+
+# ---------------------------------------------------------------------------
 # Backend API Client Helpers
 # ---------------------------------------------------------------------------
 
 def check_backend_health() -> Tuple[bool, str]:
     """Check if the backend is running and healthy."""
+    ensure_backend_running()
     try:
         resp = httpx.get(f"{BACKEND_URL}/health", timeout=3.0)
         if resp.status_code == 200:
@@ -155,9 +255,10 @@ def check_backend_health() -> Tuple[bool, str]:
 
 def call_analyze_api(file_bytes: bytes, filename: str, job_description: str) -> Dict[str, Any]:
     """Call POST /analyze to run the full scoring pipeline."""
+    ensure_backend_running()
     files = {"file": (filename, file_bytes, "application/pdf")}
     data = {"job_description": job_description}
-    resp = httpx.post(f"{BACKEND_URL}/analyze", files=files, data=data, timeout=60.0)
+    resp = httpx.post(f"{BACKEND_URL}/analyze", files=files, data=data, timeout=120.0)
     resp.raise_for_status()
     return resp.json()
 
@@ -166,6 +267,7 @@ def call_bias_audit_api(
     original_text: str, job_description: str, attribute: str, n_pairs: int, mode: str = "redacted"
 ) -> Dict[str, Any]:
     """Call POST /bias-audit to test whether swapped identities change scores."""
+    ensure_backend_running()
     payload = {
         "original_text": original_text,
         "job_description": job_description,
@@ -173,7 +275,7 @@ def call_bias_audit_api(
         "n_pairs": n_pairs,
         "mode": mode,
     }
-    resp = httpx.post(f"{BACKEND_URL}/bias-audit", json=payload, timeout=60.0)
+    resp = httpx.post(f"{BACKEND_URL}/bias-audit", json=payload, timeout=120.0)
     resp.raise_for_status()
     return resp.json()
 
@@ -185,6 +287,7 @@ def call_feedback_api(
     prompt_version: str,
 ) -> Dict[str, Any]:
     """Call POST /feedback for qualitative suggestions."""
+    ensure_backend_running()
     payload = {
         "job_description": job_description,
         "resume_text": resume_text,

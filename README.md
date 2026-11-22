@@ -1,3 +1,9 @@
+---
+title: AI Resume Auditor
+sdk: docker
+app_port: 7860
+---
+
 # AI Resume Auditor
 
 A transparent, explainable resume–job-description scoring tool.  

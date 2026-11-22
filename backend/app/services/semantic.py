@@ -39,7 +39,6 @@ if _cache_path.exists():
 
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
 
 from backend.app.config import settings
 
@@ -55,13 +54,14 @@ from backend.app.config import settings
 #   the API unusable.
 # ---------------------------------------------------------------------------
 
-_model: Optional[SentenceTransformer] = None
+_model = None
 
 
-def _get_model() -> SentenceTransformer:
+def _get_model():
     """Return the shared SentenceTransformer instance, loading it if needed."""
     global _model
     if _model is None:
+        from sentence_transformers import SentenceTransformer
         _model = SentenceTransformer(settings.model_name)
     return _model
 
